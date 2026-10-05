@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090909">
+  <meta name="description" content="MASSIVE DYNAMICS RECORDING STUDIOS — recording, mixing, mastering, production and original beats.">
+  <title>MASSIVE DYNAMICS RECORDING STUDIOS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090909;
+      --surface: #111110;
+      --surface-2: #171716;
+      --line: rgba(255,255,255,.11);
+      --muted: #9a9995;
+      --white: #f7f5f0;
+      --gold: #dcae4d;
+      --gold-bright: #f1c86f;
+      --silver: #c8c9c8;
+      --font-display: "Barlow Condensed", Impact, sans-serif;
+      --font-body: "DM Sans", Arial, sans-serif;
+      --max: 1240px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 82px; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--white);
+      font-family: var(--font-body);
+      line-height: 1.55;
+      overflow-x: hidden;
+    }
+    body.modal-open { overflow: hidden; }
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font: inherit; }
+    button { color: inherit; }
+    img { display: block; max-width: 100%; }
+    .wrap { width: min(var(--max), calc(100% - 56px)); margin-inline: auto; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--gold-bright);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .19em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before { content: ""; width: 22px; height: 1px; background: currentColor; }
+    .display {
+      margin: 0;
+      font-family: var(--font-display);
+      font-weight: 800;
+      line-height: .9;
+      letter-spacing: -.025em;
+      text-transform: uppercase;
+    }
+    .section { padding: 110px 0; }
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 30px;
+      margin-bottom: 42px;
+    }
+    .section-heading h2 { font-size: clamp(48px, 7vw, 82px); margin: 15px 0 0; }
+    .section-heading > p {
+      max-width: 390px;
+      margin: 0 0 5px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .btn {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 11px;
+      min-height: 50px;
+      padding: 0 23px;
+      border: 1px solid transparent;
+      background: var(--gold);
+      color: #111;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      transition: transform .2s, background .2s, border-color .2s, color .2s;
+    }
+    .btn:hover { transform: translateY(-2px); background: var(--gold-bright); }
+    .btn-outline { color: var(--white); background: transparent; border-color: rgba(255,255,255,.28); }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold-bright); background: rgba(220,174,77,.06); }
+    .btn-small { min-height: 42px; padding: 0 17px; font-size: 10px; }
+    .icon { width: 17px; height: 17px; display: inline-block; flex: 0 0 auto; }
+    .gold-text { color: var(--gold-bright); }
+
+    /* Navigation */
+    .site-header {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 40;
+      background: rgba(8,8,8,.88);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      backdrop-filter: blur(14px);
+    }
+    .nav-row { height: 76px; display: flex; align-items: center; justify-content: space-between; }
+    .brand { display: flex; align-items: center; gap: 12px; min-width: 230px; }
+    .brand-mark {
+      width: 39px; height: 39px; display: grid; place-items: center;
+      border: 1px solid var(--gold);
+      color: var(--gold-bright);
+      font-family: var(--font-display); font-weight: 800; font-size: 22px;
+      letter-spacing: -2px;
+      transform: skew(-7deg);
+    }
+    .brand-copy { display: flex; flex-direction: column; line-height: 1; }
+    .brand-copy strong { font-family: var(--font-display); font-size: 19px; letter-spacing: .04em; }
+    .brand-copy span { margin-top: 4px; color: var(--muted); font-size: 8px; letter-spacing: .2em; }
+    .main-nav { display: flex; align-items: center; gap: clamp(17px, 2.5vw, 34px); }
+    .main-nav a { color: #c8c7c2; font-size: 11px; font-weight: 600; transition: color .2s; }
+    .main-nav a:hover, .main-nav a.active { color: var(--gold-bright); }
+    .nav-actions { display: flex; align-items: center; gap: 12px; }
+    .cart-button {
+      display: inline-flex; align-items: center; gap: 8px; border: 0; background: none;
+      cursor: pointer; color: var(--white); padding: 9px 5px; font-size: 11px; font-weight: 700;
+    }
+    .cart-count {
+      width: 19px; height: 19px; border-radius: 50%; display: grid; place-items: center;
+      background: var(--gold); color: #111; font-size: 10px;
+    }
+    .menu-toggle { display: none; border: 1px solid var(--line); width: 42px; height: 42px; background: transparent; cursor: pointer; }
+    .menu-toggle span { display: block; width: 17px; height: 1px; margin: 5px auto; background: white; transition: .2s; }
+
+    /* Hero */
+    .hero {
+      min-height: 790px; padding: 122px 0 50px; position: relative; display: flex; align-items: center;
+      overflow: hidden; isolation: isolate;
+      background:
+        radial-gradient(ellipse at 72% 48%, rgba(195,138,42,.10), transparent 32%),
+        linear-gradient(90deg, #080808 5%, rgba(8,8,8,.96) 37%, rgba(8,8,8,.2) 100%);
+    }
+    .hero::before {
+      content: ""; position: absolute; inset: 0; z-index: -2; opacity: .14;
+      background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 62px 62px; mask-image: linear-gradient(90deg, black, transparent 90%);
+    }
+    .hero-inner { display: grid; grid-template-columns: 1fr 1fr; align-items: center; position: relative; }
+    .hero-copy { position: relative; z-index: 2; padding: 10px 0 35px; animation: rise .8s both; }
+    .hero-kicker { margin-bottom: 24px; }
+    .hero h1 { font-size: clamp(72px, 10.3vw, 142px); letter-spacing: -.045em; }
+    .hero h1 span { display: block; }
+    .hero h1 .second-line { color: var(--gold-bright); }
+    .hero-subtitle {
+      margin: 25px 0 29px; color: #c0bfba; font-size: clamp(14px, 1.3vw, 17px);
+      max-width: 460px; line-height: 1.65;
+    }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .hero-note { display: flex; align-items: center; gap: 11px; margin-top: 38px; color: #aaa9a5; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; }
+    .live-dot { width: 7px; height: 7px; border-radius: 50%; background: #83c28e; box-shadow: 0 0 14px #83c28e; }
+    .hero-art {
+      min-width: 0; margin-left: -55px; position: relative; animation: artReveal 1s .12s both;
+    }
+    .hero-art::after {
+      content: ""; position: absolute; inset: 0; pointer-events: none;
+      background: linear-gradient(90deg, #090909 0%, transparent 27%, transparent 77%, #090909 100%),
+                  linear-gradient(0deg, #090909 0%, transparent 18%, transparent 85%, #090909 100%);
+    }
+    .hero-art img { width: 100%; mix-blend-mode: screen; filter: contrast(1.08) saturate(.94); }
+    .hero-scroll {
+      position: absolute; bottom: 28px; right: 0; display: flex; align-items: center; gap: 10px;
+      color: #777; font-size: 9px; letter-spacing: .2em; text-transform: uppercase; writing-mode: vertical-rl;
+    }
+    .hero-scroll::after { content: ""; height: 42px; width: 1px; background: var(--gold); }
+    @keyframes rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes artReveal { from { opacity: 0; transform: scale(.96); } to { opacity: 1; transform: scale(1); } }
+
+    /* Proof ticker */
+    .ticker { border-block: 1px solid var(--line); background: #0e0e0d; overflow: hidden; }
+    .ticker-track { display: flex; width: max-content; padding: 17px 0; animation: ticker 34s linear infinite; }
+    .ticker-item { display: flex; align-items: center; gap: 26px; padding: 0 27px; color: #bdbbb5; font-family: var(--font-display); font-size: 19px; letter-spacing: .11em; text-transform: uppercase; }
+    .ticker-item i { width: 6px; height: 6px; display: block; background: var(--gold); transform: rotate(45deg); }
+    @keyframes ticker { to { transform: translateX(-50%); } }
+
+    /* About */
+    .about-grid { display: grid; grid-template-columns: .95fr 1.05fr; gap: 86px; align-items: center; }
+    .about-visual { position: relative; min-height: 480px; border: 1px solid rgba(220,174,77,.22); overflow: hidden; }
+    .about-visual img { position: absolute; width: 100%; height: 100%; object-fit: cover; filter: brightness(.74) saturate(.75); }
+    .about-visual::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg,rgba(0,0,0,.65), transparent 65%), linear-gradient(90deg,rgba(0,0,0,.15),transparent); }
+    .visual-caption { position: absolute; z-index: 1; left: 26px; bottom: 24px; color: white; }
+    .visual-caption strong { display: block; font-family: var(--font-display); font-size: 27px; text-transform: uppercase; }
+    .visual-caption span { color: #ccc; font-size: 10px; letter-spacing: .15em; text-transform: uppercase; }
+    .about-stamp {
+      position: absolute; z-index: 2; top: 22px; right: 22px; padding: 10px 13px;
+      border: 1px solid rgba(255,255,255,.45); color: white; font-size: 9px; letter-spacing: .16em; text-transform: uppercase;
+      background: rgba(0,0,0,.45);
+    }
+    .about-copy h2 { font-size: clamp(52px, 6vw, 78px); margin: 14px 0 24px; }
+    .about-copy > p { color: var(--muted); font-size: 14px; max-width: 560px; }
+    .about-copy > p + p { margin-top: 14px; }
+    .about-bottom { margin-top: 30px; display: flex; align-items: center; gap: 25px; }
+    .about-stat { padding-left: 19px; border-left: 1px solid var(--gold); }
+    .about-stat strong { display: block; font-family: var(--font-display); font-size: 29px; line-height: 1; }
+    .about-stat span { color: var(--muted); font-size: 9px; letter-spacing: .1em; text-transform: uppercase; }
+
+    /* Services */
+    .services { background: #10100f; }
+    .service-grid { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--line); }
+    .service-card { min-height: 280px; padding: 27px 24px 24px; border-right: 1px solid var(--line); position: relative; transition: background .25s; }
+    .service-card:last-child { border-right: 0; }
+    .service-card:hover { background: #191816; }
+    .service-number { color: #797873; font-size: 10px; letter-spacing: .15em; }
+    .service-icon { margin: 36px 0 16px; color: var(--gold); width: 32px; height: 32px; }
+    .service-card h3 { margin: 0 0 8px; font-family: var(--font-display); font-size: 29px; text-transform: uppercase; }
+    .service-card p { margin: 0; color: var(--muted); font-size: 12px; }
+    .service-link { display: inline-block; margin-top: 20px; color: var(--gold-bright); font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+    .service-link:hover { color: white; }
+
+    /* Feature */
+    .feature-panel {
+      display: grid; grid-template-columns: 1fr 1fr; min-height: 385px; border: 1px solid var(--line);
+      background: linear-gradient(115deg,#151513,#0c0c0b 75%);
+    }
+    .feature-copy { padding: 48px; align-self: center; }
+    .feature-copy h2 { margin: 13px 0 13px; font-size: clamp(45px, 5.5vw, 68px); }
+    .feature-copy p { margin: 0; color: var(--muted); font-size: 13px; max-width: 400px; }
+    .track-list { padding: 34px; display: flex; flex-direction: column; justify-content: center; }
+    .track-row { display: grid; grid-template-columns: 42px 1fr auto; gap: 16px; align-items: center; padding: 17px 0; border-bottom: 1px solid var(--line); }
+    .track-row:first-child { border-top: 1px solid var(--line); }
+    .play-button {
+      width: 38px; height: 38px; border-radius: 50%; border: 1px solid rgba(220,174,77,.55);
+      background: transparent; color: var(--gold-bright); display: grid; place-items: center; cursor: pointer;
+      transition: background .2s, transform .2s;
+    }
+    .play-button:hover, .play-button.is-playing { background: var(--gold); color: #111; transform: scale(1.05); }
+    .track-title { display: block; font-size: 12px; font-weight: 700; }
+    .track-meta { display: block; color: var(--muted); font-size: 10px; margin-top: 3px; }
+    .track-duration { color: #888; font-size: 10px; }
+    .track-progress { grid-column: 2 / -1; height: 2px; margin-top: -8px; background: #333; overflow: hidden; }
+    .track-progress span { display: block; height: 100%; width: 0; background: var(--gold); }
+    .track-row.is-playing .track-progress span { animation: progress 18s linear forwards; }
+    @keyframes progress { to { width: 100%; } }
+
+    /* Gallery */
+    .gallery-grid { display: grid; grid-template-columns: 1.15fr .85fr .85fr; grid-template-rows: 230px 230px; gap: 12px; }
+    .gallery-item { position: relative; padding: 0; border: 0; overflow: hidden; background: #1b1b19; cursor: pointer; text-align: left; }
+    .gallery-item:first-child { grid-row: span 2; }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.72) brightness(.73); transition: transform .5s, filter .3s; }
+    .gallery-item:hover img { transform: scale(1.055); filter: saturate(.95) brightness(.9); }
+    .gallery-item::after { content: ""; position: absolute; inset: 30% 0 0; background: linear-gradient(transparent, rgba(0,0,0,.78)); }
+    .gallery-label { position: absolute; z-index: 1; left: 19px; bottom: 17px; }
+    .gallery-label strong { display: block; font-family: var(--font-display); font-size: 22px; text-transform: uppercase; }
+    .gallery-label span { color: #ccc; font-size: 9px; letter-spacing: .15em; text-transform: uppercase; }
+
+    /* Store */
+    .store { background: #10100f; }
+    .store-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 20px; margin: -14px 0 26px; }
+    .filter-tabs { display: flex; gap: 7px; flex-wrap: wrap; }
+    .filter-tab { padding: 9px 14px; color: #aaa; background: transparent; border: 1px solid var(--line); cursor: pointer; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; }
+    .filter-tab.active, .filter-tab:hover { color: #111; background: var(--gold); border-color: var(--gold); }
+    .store-note { color: var(--muted); font-size: 10px; }
+    .beat-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+    .beat-card { border: 1px solid var(--line); background: #141413; min-width: 0; transition: border-color .2s, transform .2s; }
+    .beat-card:hover { border-color: rgba(220,174,77,.55); transform: translateY(-3px); }
+    .beat-card[hidden] { display: none; }
+    .beat-art {
+      height: 185px; position: relative; display: flex; align-items: end; padding: 17px;
+      overflow: hidden; background: radial-gradient(circle at 75% 22%, #796023, transparent 38%), linear-gradient(130deg,#25211a,#0d0d0c 70%);
+    }
+    .beat-art::before { content: ""; position: absolute; inset: 0; opacity: .32; background: repeating-linear-gradient(135deg,transparent 0 17px,rgba(255,255,255,.08) 18px,transparent 19px 34px); }
+    .beat-card:nth-child(2) .beat-art { background: radial-gradient(circle at 25% 20%,#455453,transparent 40%), linear-gradient(140deg,#171e1f,#0b0c0d 70%); }
+    .beat-card:nth-child(3) .beat-art { background: radial-gradient(circle at 76% 23%,#5e3850,transparent 38%), linear-gradient(140deg,#21151c,#0c0c0d 70%); }
+    .beat-art-no { position: absolute; right: 18px; top: 4px; color: rgba(255,255,255,.08); font-family: var(--font-display); font-size: 100px; font-weight: 800; line-height: 1; }
+    .beat-art .play-button { z-index: 1; }
+    .beat-tag { z-index: 1; margin: 0 0 4px 12px; font-size: 9px; color: #d9d4c8; letter-spacing: .12em; text-transform: uppercase; }
+    .beat-info { padding: 18px; }
+    .beat-title-row { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; }
+    .beat-title-row h3 { margin: 0; font-family: var(--font-display); font-size: 25px; text-transform: uppercase; }
+    .beat-price { color: var(--gold-bright); font-size: 13px; font-weight: 700; }
+    .beat-meta { color: var(--muted); font-size: 10px; margin: 5px 0 16px; }
+    .beat-actions { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .license { color: #888; font-size: 9px; }
+    .store-bottom { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 22px 0 0; color: var(--muted); font-size: 11px; }
+
+    /* Booking */
+    .booking-grid { display: grid; grid-template-columns: 1.12fr .88fr; gap: 25px; align-items: start; }
+    .booking-box { border: 1px solid var(--line); background: #111110; padding: 25px; }
+    .booking-box h3 { margin: 0 0 21px; font-family: var(--font-display); font-size: 29px; text-transform: uppercase; }
+    .calendar-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 17px; }
+    .calendar-head strong { font-size: 13px; }
+    .cal-nav { display: flex; gap: 7px; }
+    .cal-nav button { display: grid; place-items: center; width: 32px; height: 32px; border: 1px solid var(--line); background: transparent; cursor: pointer; color: #ddd; }
+    .cal-nav button:hover { border-color: var(--gold); color: var(--gold); }
+    .calendar-grid { display: grid; grid-template-columns: repeat(7,1fr); gap: 5px; }
+    .cal-label { text-align: center; padding: 6px 0 10px; color: #777; font-size: 9px; text-transform: uppercase; }
+    .cal-day {
+      min-height: 39px; border: 1px solid transparent; background: #191918; color: #ddd; cursor: pointer; font-size: 11px;
+      transition: .15s;
+    }
+    .cal-day:hover:not(:disabled) { border-color: var(--gold); }
+    .cal-day:disabled { color: #555; background: #131312; cursor: not-allowed; }
+    .cal-day.selected { background: var(--gold); color: #111; font-weight: 700; }
+    .cal-day.today:not(.selected) { border-color: rgba(220,174,77,.65); }
+    .calendar-help { margin: 14px 0 0; color: #82817c; font-size: 10px; }
+    .booking-summary { display: flex; justify-content: space-between; padding: 14px 0; margin-top: 15px; border-top: 1px solid var(--line); color: var(--muted); font-size: 11px; }
+    .booking-summary strong { color: var(--white); }
+    .booking-form { display: grid; gap: 14px; }
+    .booking-form label, .contact-form label { color: #aaa9a4; display: grid; gap: 7px; font-size: 10px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; }
+    .field, .booking-form select, .contact-form input, .contact-form textarea, .modal input, .modal select {
+      width: 100%; border: 1px solid rgba(255,255,255,.14); background: #0b0b0a; color: var(--white);
+      min-height: 46px; padding: 11px 12px; outline: none; font-size: 12px;
+    }
+    .field:focus, .booking-form select:focus, .contact-form input:focus, .contact-form textarea:focus, .modal input:focus, .modal select:focus { border-color: var(--gold); }
+    select option { background: #111; }
+    .booking-form .btn { width: 100%; margin-top: 4px; }
+    .secure-note { color: #777; font-size: 9px; text-align: center; margin: -4px 0 0; }
+    .availability { display: flex; align-items: center; gap: 8px; color: #91c799; font-size: 10px; margin: 12px 0 0; }
+    .availability::before { content: ""; width: 6px; height: 6px; background: #91c799; border-radius: 50%; }
+
+    /* Contact */
+    .contact { background: #10100f; }
+    .contact-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 80px; }
+    .contact-copy h2 { font-size: clamp(52px, 6vw, 78px); margin: 14px 0 20px; }
+    .contact-copy > p { color: var(--muted); font-size: 13px; max-width: 380px; }
+    .contact-details { display: grid; gap: 17px; margin-top: 31px; }
+    .contact-item { display: flex; gap: 13px; align-items: center; color: #deddd7; font-size: 12px; }
+    .contact-item svg { color: var(--gold); width: 17px; height: 17px; }
+    .socials { display: flex; gap: 9px; margin-top: 26px; }
+    .socials a { border: 1px solid var(--line); padding: 9px 12px; color: #aaa; font-size: 9px; letter-spacing: .08em; text-transform: uppercase; transition: .2s; }
+    .socials a:hover { border-color: var(--gold); color: var(--gold); }
+    .contact-form { padding: 27px; border: 1px solid var(--line); display: grid; grid-template-columns: 1fr 1fr; gap: 15px; background: #141413; }
+    .contact-form .full { grid-column: 1 / -1; }
+    .contact-form textarea { min-height: 105px; resize: vertical; }
+    .contact-form .btn { width: max-content; }
+    .form-feedback { display: none; color: #9dd3a5; font-size: 11px; align-self: center; }
+    .form-feedback.show { display: block; }
+
+    /* Footer */
+    footer { padding: 27px 0; border-top: 1px solid var(--line); background: #090909; }
+    .footer-row { display: flex; justify-content: space-between; align-items: center; gap: 20px; color: #777; font-size: 9px; }
+    .footer-row a { color: #aaa; }
+    .footer-row a:hover { color: var(--gold); }
+
+    /* Modal + lightbox */
+    .modal-backdrop, .lightbox {
+      position: fixed; z-index: 100; inset: 0; display: none; place-items: center; padding: 20px;
+      background: rgba(0,0,0,.78); backdrop-filter: blur(7px);
+    }
+    .modal-backdrop.open, .lightbox.open { display: grid; }
+    .modal {
+      position: relative; width: min(510px,100%); max-height: 90vh; overflow: auto;
+      background: #141413; border: 1px solid rgba(220,174,77,.38); padding: 30px;
+      box-shadow: 0 25px 100px rgba(0,0,0,.6); animation: rise .25s both;
+    }
+    .modal h2 { font-family: var(--font-display); font-size: 40px; line-height: 1; text-transform: uppercase; margin: 7px 0 9px; }
+    .modal p { color: var(--muted); font-size: 12px; }
+    .modal-close { position: absolute; right: 14px; top: 14px; border: 1px solid var(--line); background: transparent; width: 34px; height: 34px; cursor: pointer; font-size: 19px; }
+    .modal-close:hover { color: var(--gold); border-color: var(--gold); }
+    .modal-form { display: grid; gap: 12px; margin-top: 19px; }
+    .modal-form label { color: #aaa; display: grid; gap: 6px; font-size: 9px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+    .checkout-total { display: flex; justify-content: space-between; padding: 14px 0; border-block: 1px solid var(--line); font-size: 12px; }
+    .checkout-total strong { color: var(--gold-bright); }
+    .demo-disclaimer { font-size: 9px !important; text-align: center; margin: 0; }
+    .modal-form .btn { width: 100%; }
+    .lightbox img { max-width: min(1000px, 92vw); max-height: 83vh; object-fit: contain; border: 1px solid rgba(255,255,255,.18); }
+    .lightbox-caption { color: #ddd; position: absolute; bottom: 15px; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; }
+
+    .toast {
+      position: fixed; right: 24px; bottom: 22px; z-index: 120; padding: 13px 17px;
+      background: var(--gold); color: #111; font-size: 11px; font-weight: 700;
+      transform: translateY(20px); opacity: 0; pointer-events: none; transition: .25s;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+
+    @media (max-width: 980px) {
+      .main-nav { gap: 14px; }
+      .main-nav a { font-size: 10px; }
+      .brand { min-width: 190px; }
+      .nav-cta { display: none; }
+      .hero { min-height: 720px; }
+      .hero-art { margin-left: -85px; }
+      .about-grid { gap: 45px; }
+      .service-grid { grid-template-columns: repeat(2,1fr); }
+      .service-card:nth-child(2) { border-right: 0; }
+      .service-card:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+      .booking-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+      .contact-grid { gap: 40px; }
+    }
+    @media (max-width: 720px) {
+      .wrap { width: min(100% - 36px, var(--max)); }
+      .section { padding: 78px 0; }
+      .section-heading { align-items: start; flex-direction: column; gap: 15px; margin-bottom: 30px; }
+      .section-heading h2 { font-size: 58px; }
+      .section-heading > p { max-width: 500px; }
+      .nav-row { height: 66px; }
+      .brand { min-width: 0; }
+      .brand-copy strong { font-size: 17px; }
+      .brand-copy span { font-size: 7px; }
+      .brand-mark { width: 35px; height: 35px; }
+      .menu-toggle { display: block; }
+      .nav-actions { gap: 7px; }
+      .cart-button { font-size: 0; gap: 5px; }
+      .cart-count { font-size: 10px; }
+      .main-nav {
+        display: none; position: absolute; left: 0; right: 0; top: 66px; padding: 12px 18px 20px;
+        background: rgba(10,10,10,.98); border-bottom: 1px solid var(--line);
+        flex-direction: column; align-items: stretch; gap: 0;
+      }
+      .main-nav.open { display: flex; }
+      .main-nav a { padding: 13px 0; border-bottom: 1px solid rgba(255,255,255,.06); font-size: 12px; }
+      .main-nav a:last-child { border-bottom: 0; }
+      .hero { padding-top: 97px; min-height: auto; }
+      .hero-inner { display: flex; flex-direction: column; align-items: stretch; }
+      .hero-copy { padding: 28px 0 0; }
+      .hero h1 { font-size: clamp(69px, 18vw, 112px); }
+      .hero-subtitle { max-width: 400px; font-size: 14px; margin: 20px 0 23px; }
+      .hero-art { margin: -14px -13% -12px; order: 2; }
+      .hero-art::after { background: linear-gradient(90deg,#090909,transparent 15%,transparent 85%,#090909),linear-gradient(0deg,#090909 0%,transparent 20%,transparent 83%,#090909); }
+      .hero-scroll { display: none; }
+      .hero-note { margin-top: 26px; }
+      .ticker-item { font-size: 16px; }
+      .about-grid { grid-template-columns: 1fr; gap: 32px; }
+      .about-visual { min-height: 360px; }
+      .about-copy h2 { font-size: 62px; }
+      .service-grid { grid-template-columns: 1fr 1fr; }
+      .service-card { min-height: 260px; padding: 21px 16px; }
+      .service-card h3 { font-size: 25px; }
+      .service-icon { margin-top: 26px; }
+      .feature-panel { grid-template-columns: 1fr; }
+      .feature-copy { padding: 32px 25px 20px; }
+      .track-list { padding: 20px 25px 28px; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: 230px 170px 170px; }
+      .gallery-item:first-child { grid-row: auto; grid-column: 1 / -1; }
+      .beat-grid { grid-template-columns: 1fr; }
+      .beat-art { height: 190px; }
+      .store-toolbar { align-items: flex-start; flex-direction: column; }
+      .store-bottom { align-items: flex-start; flex-direction: column; }
+      .booking-grid { grid-template-columns: 1fr; }
+      .booking-box { padding: 21px 17px; }
+      .cal-day { min-height: 38px; }
+      .contact-grid { grid-template-columns: 1fr; gap: 30px; }
+      .contact-copy h2 { font-size: 63px; }
+      .contact-form { padding: 20px; }
+      .footer-row { align-items: flex-start; flex-direction: column; }
+    }
+    @media (max-width: 420px) {
+      .hero h1 { font-size: 65px; }
+      .hero-actions .btn { width: 100%; }
+      .service-card { min-height: 275px; }
+      .service-card p { font-size: 11px; }
+      .contact-form { grid-template-columns: 1fr; }
+      .contact-form .full { grid-column: auto; }
+      .modal { padding: 26px 20px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap nav-row">
+      <a class="brand" href="#home" aria-label="Massive Dynamics home">
+        <span class="brand-mark">MD</span>
+        <span class="brand-copy"><strong>MASSIVE DYNAMICS</strong><span>RECORDING STUDIOS</span></span>
+      </a>
+      <nav class="main-nav" id="mainNav" aria-label="Main navigation">
+        <a href="#about">Studio</a>
+        <a href="#services">Services</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#beats">Beats</a>
+        <a href="#booking">Booking</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="cart-button" type="button" id="cartButton" aria-label="Open your beat cart">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 4h2l2.1 11.2a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 1.9-1.4L22 8H6"/><circle cx="10" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg>
+          Cart <span class="cart-count" id="cartCount">0</span>
+        </button>
+        <a class="btn btn-small nav-cta" href="#booking">Book a session <span aria-hidden="true">↗</span></a>
+        <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open navigation" aria-expanded="false"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="wrap hero-inner">
+        <div class="hero-copy">
+          <div class="eyebrow hero-kicker">Independent sound. Unmistakable impact.</div>
+          <h1 class="display"><span>Massive</span><span class="second-line">Dynamics</span></h1>
+          <p class="hero-subtitle">Make your next record impossible to ignore. A world-class creative space for artists, producers, and the sounds that move culture.</p>
+          <div class="hero-actions">
+            <a class="btn" href="#booking">Book a session <span aria-hidden="true">↗</span></a>
+            <a class="btn btn-outline" href="#beats">Buy beats <span aria-hidden="true">→</span></a>
+          </div>
+          <div class="hero-note"><span class="live-dot"></span> Built for the next big thing</div>
+        </div>
+        <div class="hero-art" aria-label="Massive Dynamics gold and silver studio emblem">
+          <img src="https://www.designarena.ai/u/6e00645e-bcd5-4a73-a76b-ac296091602e" alt="MASSIVE DYNAMICS recording studios emblem with a gold microphone and headphones">
+        </div>
+      </div>
+      <a class="hero-scroll" href="#about">Scroll to explore</a>
+    </section>
+
+    <div class="ticker" aria-label="Studio services">
+      <div class="ticker-track">
+        <span class="ticker-item"><i></i> Recording</span><span class="ticker-item"><i></i> Mixing</span><span class="ticker-item"><i></i> Mastering</span><span class="ticker-item"><i></i> Production</span><span class="ticker-item"><i></i> Original beats</span><span class="ticker-item"><i></i> Recording</span><span class="ticker-item"><i></i> Mixing</span><span class="ticker-item"><i></i> Mastering</span><span class="ticker-item"><i></i> Production</span><span class="ticker-item"><i></i> Original beats</span>
+      </div>
+    </div>
+
+    <section class="section" id="about">
+      <div class="wrap about-grid">
+        <div class="about-visual">
+          <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=1100&q=85" alt="Warmly lit professional recording studio control room">
+          <span class="about-stamp">The room makes the record</span>
+          <div class="visual-caption"><strong>Built for the take</strong><span>One room. Limitless directions.</span></div>
+        </div>
+        <div class="about-copy">
+          <div class="eyebrow">More than a recording room</div>
+          <h2 class="display">Your sound.<br><span class="gold-text">Your legacy.</span></h2>
+          <p>MASSIVE DYNAMICS RECORDING STUDIOS was built around one idea: great records happen when artists have the room, tools, and trust to go all in.</p>
+          <p>From the first rough vocal to the final master, our team brings technical precision and creative instinct to every session. No presets for your vision. Just the right people, the right sound, and space to make something real.</p>
+          <div class="about-bottom">
+            <div class="about-stat"><strong>24/7</strong><span>By appointment</span></div>
+            <div class="about-stat"><strong>01</strong><span>Your sound comes first</span></div>
+            <a class="btn btn-outline btn-small" href="#contact">Meet the studio <span>↗</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section services" id="services">
+      <div class="wrap">
+        <div class="section-heading">
+          <div><div class="eyebrow">From first idea to final master</div><h2 class="display">Make it <span class="gold-text">massive.</span></h2></div>
+          <p>Focused sessions, experienced engineers, and production support that meets your project where it is.</p>
+        </div>
+        <div class="service-grid">
+          <article class="service-card">
+            <span class="service-number">01 / TRACK</span>
+            <svg class="service-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="8" y="3" width="16" height="25" rx="7"/><path d="M12 9h8M12 13h8M12 17h8M16 28v3m-6 0h12"/></svg>
+            <h3>Recording</h3><p>Capture vocals and instruments in a comfortable, acoustically treated room.</p>
+            <a class="service-link" href="#booking">Explore sessions ↗</a>
+          </article>
+          <article class="service-card">
+            <span class="service-number">02 / BALANCE</span>
+            <svg class="service-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 10h24M4 22h24"/><circle cx="11" cy="10" r="3" fill="#111"/><circle cx="21" cy="22" r="3" fill="#111"/><path d="M16 4v12m0-6h12M16 16v12m0-6H4"/></svg>
+            <h3>Mixing</h3><p>Bring clarity, punch, and a cohesive sonic identity to every element.</p>
+            <a class="service-link" href="#contact">Start a mix ↗</a>
+          </article>
+          <article class="service-card">
+            <span class="service-number">03 / FINISH</span>
+            <svg class="service-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 16h4l3-9 5 18 4-14 3 9h7"/><circle cx="16" cy="16" r="14"/></svg>
+            <h3>Mastering</h3><p>Final polish and translation, ready for streaming, radio, and everywhere else.</p>
+            <a class="service-link" href="#contact">Get it mastered ↗</a>
+          </article>
+          <article class="service-card">
+            <span class="service-number">04 / CREATE</span>
+            <svg class="service-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 27V8l17-4v19"/><ellipse cx="7" cy="27" rx="5" ry="3"/><ellipse cx="24" cy="23" rx="5" ry="3"/><path d="M12 13l17-4"/></svg>
+            <h3>Production</h3><p>Build a distinctive track with hands-on beatmaking and artist-led direction.</p>
+            <a class="service-link" href="#beats">Find your sound ↗</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="samples">
+      <div class="wrap">
+        <div class="feature-panel">
+          <div class="feature-copy">
+            <div class="eyebrow">Press play. Feel the room.</div>
+            <h2 class="display">Made here.<br><span class="gold-text">Made to move.</span></h2>
+            <p>Take a quick listen to the studio sound. Tap a preview to hear a short, original tone demo.</p>
+          </div>
+          <div class="track-list" id="sampleTracks">
+            <div class="track-row" data-track="sample-1">
+              <button class="play-button audio-toggle" type="button" aria-label="Play Midnight Run preview"><svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+              <div><span class="track-title">Midnight Run</span><span class="track-meta">Studio session · Hip-hop</span></div><span class="track-duration">0:18</span>
+              <div class="track-progress"><span></span></div>
+            </div>
+            <div class="track-row" data-track="sample-2">
+              <button class="play-button audio-toggle" type="button" aria-label="Play Heavy Weather preview"><svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+              <div><span class="track-title">Heavy Weather</span><span class="track-meta">Mix &amp; master · Alternative</span></div><span class="track-duration">0:18</span>
+              <div class="track-progress"><span></span></div>
+            </div>
+            <div class="track-row" data-track="sample-3">
+              <button class="play-button audio-toggle" type="button" aria-label="Play Gold Standard preview"><svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+              <div><span class="track-title">Gold Standard</span><span class="track-meta">Production demo · R&amp;B</span></div><span class="track-duration">0:18</span>
+              <div class="track-progress"><span></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="gallery">
+      <div class="wrap">
+        <div class="section-heading">
+          <div><div class="eyebrow">Inside the sound</div><h2 class="display">The <span class="gold-text">space.</span></h2></div>
+          <p>A closer look at the rooms, details, and gear that help turn ideas into records.</p>
+        </div>
+        <div class="gallery-grid">
+          <button class="gallery-item" data-full="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=1500&q=90" aria-label="View control room image">
+            <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=1000&q=80" alt="Professional audio mixing console in a recording studio">
+            <span class="gallery-label"><strong>Control room</strong><span>Where the details live</span></span>
+          </button>
+          <button class="gallery-item" data-full="https://images.unsplash.com/photo-1598653222000-6b7b7a552625?auto=format&fit=crop&w=1500&q=90" aria-label="View studio equipment image">
+            <img src="https://images.unsplash.com/photo-1598653222000-6b7b7a552625?auto=format&fit=crop&w=800&q=80" alt="Studio mixing desk and audio equipment">
+            <span class="gallery-label"><strong>Analog heart</strong><span>Tools with character</span></span>
+          </button>
+          <button class="gallery-item" data-full="https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=1500&q=90" aria-label="View live music image">
+            <img src="https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=800&q=80" alt="Artist performing live under dramatic stage lights">
+            <span class="gallery-label"><strong>Artist energy</strong><span>Make it yours</span></span>
+          </button>
+          <button class="gallery-item" data-full="https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=1500&q=90" aria-label="View artist recording image">
+            <img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=800&q=80" alt="Singer performing into a microphone">
+            <span class="gallery-label"><strong>In the booth</strong><span>Catch the moment</span></span>
+          </button>
+          <button class="gallery-item" data-full="https://images.unsplash.com/photo-1593078166030-9a421ac4e5f2?auto=format&fit=crop&w=1500&q=90" aria-label="View recording microphone image">
+            <img src="https://images.unsplash.com/photo-1593078166030-9a421ac4e5f2?auto=format&fit=crop&w=800&q=80" alt="Close-up of a professional studio microphone">
+            <span class="gallery-label"><strong>Signal chain</strong><span>Every detail matters</span></span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section store" id="beats">
+      <div class="wrap">
+        <div class="section-heading">
+          <div><div class="eyebrow">Find your next record</div><h2 class="display">Beat <span class="gold-text">market.</span></h2></div>
+          <p>Original instrumentals made for artists who want a sound of their own. Preview, choose a license, and add a beat to your cart.</p>
+        </div>
+        <div class="store-toolbar">
+          <div class="filter-tabs" role="group" aria-label="Filter beats">
+            <button class="filter-tab active" type="button" data-filter="all">All beats</button>
+            <button class="filter-tab" type="button" data-filter="hip-hop">Hip-hop</button>
+            <button class="filter-tab" type="button" data-filter="rnb">R&amp;B</button>
+            <button class="filter-tab" type="button" data-filter="trap">Trap</button>
+          </div>
+          <span class="store-note">Every beat includes a tagged preview.</span>
+        </div>
+        <div class="beat-grid">
+          <article class="beat-card" data-genre="hip-hop">
+            <div class="beat-art"><span class="beat-art-no">01</span><button class="play-button audio-toggle" type="button" aria-label="Play Golden Hour beat preview"><svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button><span class="beat-tag">HIP-HOP · 92 BPM</span></div>
+            <div class="beat-info"><div class="beat-title-row"><h3>Golden Hour</h3><span class="beat-price">$39</span></div><p class="beat-meta">Soulful · Warm · Sample-led</p><div class="beat-actions"><span class="license">MP3 lease</span><button class="btn btn-small add-beat" type="button" data-id="golden" data-name="Golden Hour" data-price="39">Add to cart</button></div></div>
+          </article>
+          <article class="beat-card" data-genre="rnb">
+            <div class="beat-art"><span class="beat-art-no">02</span><button class="play-button audio-toggle" type="button" aria-label="Play Slow Motion beat preview"><svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button><span class="beat-tag">R&amp;B · 78 BPM</span></div>
+            <div class="beat-info"><div class="beat-title-row"><h3>Slow Motion</h3><span class="beat-price">$49</span></div><p class="beat-meta">Late night · Smooth · Spacious</p><div class="beat-actions"><span class="license">MP3 lease</span><button class="btn btn-small add-beat" type="button" data-id="slow" data-name="Slow Motion" data-price="49">Add to cart</button></div></div>
+          </article>
+          <article class="beat-card" data-genre="trap">
+            <div class="beat-art"><span class="beat-art-no">03</span><button class="play-button audio-toggle" type="button" aria-label="Play Night Shift beat preview"><svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button><span class="beat-tag">TRAP · 142 BPM</span></div>
+            <div class="beat-info"><div class="beat-title-row"><h3>Night Shift</h3><span class="beat-price">$39</span></div><p class="beat-meta">Dark · Hard-hitting · Cinematic</p><div class="beat-actions"><span class="license">MP3 lease</span><button class="btn btn-small add-beat" type="button" data-id="night" data-name="Night Shift" data-price="39">Add to cart</button></div></div>
+          </article>
+        </div>
+        <div class="store-bottom"><span>Need custom production? Let's build something from scratch.</span><a class="gold-text" href="#contact">Talk to a producer ↗</a></div>
+      </div>
+    </section>
+
+    <section class="section" id="booking">
+      <div class="wrap">
+        <div class="section-heading">
+          <div><div class="eyebrow">Your session starts here</div><h2 class="display">Book the <span class="gold-text">room.</span></h2></div>
+          <p>Pick an open date, choose a session length, and send a booking request. We’ll confirm the details with you.</p>
+        </div>
+        <div class="booking-grid">
+          <div class="booking-box">
+            <h3>Select a date</h3>
+            <div class="calendar-head">
+              <strong id="calendarMonth">Month Year</strong>
+              <div class="cal-nav"><button type="button" id="prevMonth" aria-label="Previous month">‹</button><button type="button" id="nextMonth" aria-label="Next month">›</button></div>
+            </div>
+            <div class="calendar-grid" id="calendarGrid"></div>
+            <p class="calendar-help">Select any available day. Dates in the past are unavailable.</p>
+            <div class="booking-summary"><span>Selected date</span><strong id="selectedDateLabel">Choose a date</strong></div>
+          </div>
+          <div class="booking-box">
+            <h3>Session details</h3>
+            <form class="booking-form" id="bookingForm">
+              <label>Session type
+                <select id="sessionType" required>
+                  <option value="recording">Recording session — $75 / hour</option>
+                  <option value="mixing">Mixing session — $90 / hour</option>
+                  <option value="production">Production session — $100 / hour</option>
+                </select>
+              </label>
+              <label>Start time
+                <select id="sessionTime" required>
+                  <option value="">Choose a time</option>
+                  <option>10:00 AM</option><option>12:00 PM</option><option>2:00 PM</option><option>4:00 PM</option><option>6:00 PM</option><option>8:00 PM</option>
+                </select>
+              </label>
+              <label>Session length
+                <select id="sessionLength">
+                  <option value="2">2 hours</option><option value="3">3 hours</option><option value="4">4 hours</option><option value="6">6 hours</option>
+                </select>
+              </label>
+              <div class="booking-summary"><span>Estimated session total</span><strong id="sessionTotal">$150</strong></div>
+              <button class="btn" type="submit">Request this session <span>↗</span></button>
+              <p class="secure-note">No charge now. We’ll confirm your session and payment details.</p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact" id="contact">
+      <div class="wrap contact-grid">
+        <div class="contact-copy">
+          <div class="eyebrow">Have a project in mind?</div>
+          <h2 class="display">Let's make<br><span class="gold-text">noise.</span></h2>
+          <p>Tell us what you’re working on. For booking questions, production inquiries, or anything in between, we’re all ears.</p>
+          <div class="contact-details">
+            <a class="contact-item" href="tel:+12125550184"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 16.9v3a2 2 0 0 1-2.2 2A19.8 19.8 0 0 1 3 5.2 2 2 0 0 1 5 3h3a2 2 0 0 1 2 1.7l.5 2.8a2 2 0 0 1-.6 1.8l-1.6 1.6a16 16 0 0 0 4.8 4.8l1.6-1.6a2 2 0 0 1 1.8-.6l2.8.5a2 2 0 0 1 1.7 2z"/></svg>+1 (212) 555-0184</a>
+            <a class="contact-item" href="mailto:hello@massivedynamics.studio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>hello@massivedynamics.studio</a>
+            <span class="contact-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>New York, NY · By appointment</span>
+          </div>
+          <div class="socials">
+            <a href="https://www.instagram.com/" target="_blank" rel="noreferrer">Instagram ↗</a>
+            <a href="https://www.youtube.com/" target="_blank" rel="noreferrer">YouTube ↗</a>
+            <a href="https://soundcloud.com/" target="_blank" rel="noreferrer">SoundCloud ↗</a>
+          </div>
+        </div>
+        <form class="contact-form" id="contactForm">
+          <label>Your name<input name="name" required placeholder="Name"></label>
+          <label>Email address<input name="email" type="email" required placeholder="you@email.com"></label>
+          <label class="full">What are you looking for?
+            <select name="topic"><option>Book a recording session</option><option>Mixing or mastering</option><option>Custom production</option><option>Beat licensing</option><option>Something else</option></select>
+          </label>
+          <label class="full">Tell us a little more<textarea name="message" required placeholder="Tell us about your project..."></textarea></label>
+          <button class="btn" type="submit">Send your message <span>↗</span></button>
+          <span class="form-feedback" id="contactFeedback" role="status">Thanks — your message is ready for the studio team.</span>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-row">
+      <span>© <span id="year"></span> MASSIVE DYNAMICS RECORDING STUDIOS</span>
+      <span>Made for the music. <a href="#home">Back to top ↑</a></span>
+      <span>NYC · Independent by nature</span>
+    </div>
+  </footer>
+
+  <div class="modal-backdrop" id="modalBackdrop" role="presentation">
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" type="button" aria-label="Close dialog">×</button>
+      <div id="modalContent"></div>
+    </section>
+  </div>
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Gallery image viewer">
+    <button class="modal-close" type="button" id="lightboxClose" aria-label="Close image viewer">×</button>
+    <img src="" alt="">
+    <span class="lightbox-caption"></span>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    (() => {
+      const $ = (selector, root = document) => root.querySelector(selector);
+      const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
+      const menuToggle = $('#menuToggle');
+      const mainNav = $('#mainNav');
+      const toast = $('#toast');
+      const modalBackdrop = $('#modalBackdrop');
+      const modalContent = $('#modalContent');
+      let toastTimer;
+      let cart = [];
+      let selectedDate = null;
+      let calendarCursor = new Date();
+      calendarCursor.setDate(1);
+      let activeAudio = null;
+      let audioContext = null;
+      let audioTimer = null;
+      let audioStopper = null;
+
+      $('#year').textContent = new Date().getFullYear();
+
+      function notify(message) {
+        toast.textContent = message;
+        toast.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toast.classList.remove('show'), 2600);
+      }
+
+      menuToggle.addEventListener('click', () => {
+        const isOpen = mainNav.classList.toggle('open');
+        menuToggle.setAttribute('aria-expanded', String(isOpen));
+        menuToggle.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
+      });
+      $$('#mainNav a').forEach(link => link.addEventListener('click', () => {
+        mainNav.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+      }));
+
+      const sectionObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            $$('#mainNav a').forEach(link => link.classList.toggle('active', link.getAttribute('href') === `#${id}`));
+          }
+        });
+      }, { rootMargin: '-30% 0px -60% 0px' });
+      $$('main section[id]').forEach(section => sectionObserver.observe(section));
+
+      // Original synthesized audio preview loops; playback begins only after a user gesture.
+      function startPreview(row) {
+        stopPreview();
+        const button = $('.audio-toggle', row);
+        const trackId = row.dataset.track || row.querySelector('.beat-title-row h3')?.textContent || 'preview';
+        const patterns = {
+          'sample-1': [110, 164.81, 196, 146.83],
+          'sample-2': [73.42, 110, 138.59, 110],
+          'sample-3': [130.81, 164.81, 196, 164.81],
+          'Golden Hour': [98, 146.83, 174.61, 146.83],
+          'Slow Motion': [73.42, 110, 130.81, 98],
+          'Night Shift': [55, 82.41, 110, 82.41]
+        };
+        try {
+          audioContext = audioContext || new (window.AudioContext || window.webkitAudioContext)();
+          if (audioContext.state === 'suspended') audioContext.resume();
+          const sequence = patterns[trackId] || [110, 146.83, 164.81, 130.81];
+          let step = 0;
+          const playNote = (frequency, start, duration, type, volume) => {
+            const osc = audioContext.createOscillator();
+            const gain = audioContext.createGain();
+            osc.type = type;
+            osc.frequency.setValueAtTime(frequency, start);
+            gain.gain.setValueAtTime(0.0001, start);
+            gain.gain.exponentialRampToValueAtTime(volume, start + .02);
+            gain.gain.exponentialRampToValueAtTime(0.0001, start + duration);
+            osc.connect(gain); gain.connect(audioContext.destination);
+            osc.start(start); osc.stop(start + duration + .03);
+          };
+          const schedule = () => {
+            if (!activeAudio || activeAudio.row !== row) return;
+            const now = audioContext.currentTime;
+            const bass = sequence[step % sequence.length];
+            playNote(bass, now, .3, 'triangle', .14);
+            playNote(bass * 2, now + .03, .19, 'sine', .045);
+            if (step % 2 === 0) playNote(1900 + (step % 3) * 220, now + .13, .035, 'square', .018);
+            if (step % 4 === 2) playNote(160, now + .18, .09, 'triangle', .06);
+            step++;
+          };
+          activeAudio = { row, button };
+          row.classList.add('is-playing');
+          button.classList.add('is-playing');
+          button.setAttribute('aria-label', 'Pause audio preview');
+          button.innerHTML = '<svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M7 5h4v14H7zm7 0h4v14h-4z"/></svg>';
+          schedule();
+          audioTimer = setInterval(schedule, 420);
+          audioStopper = setTimeout(stopPreview, 18000);
+        } catch (error) {
+          notify('Audio preview is not available in this browser.');
+        }
+      }
+      function stopPreview() {
+        if (audioTimer) clearInterval(audioTimer);
+        if (audioStopper) clearTimeout(audioStopper);
+        if (activeAudio) {
+          const { row, button } = activeAudio;
+          row.classList.remove('is-playing');
+          button.classList.remove('is-playing');
+          button.setAttribute('aria-label', button.dataset.originalLabel || 'Play audio preview');
+          button.innerHTML = '<svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
+        }
+        activeAudio = null; audioTimer = null; audioStopper = null;
+      }
+      $$('.audio-toggle').forEach(button => {
+        button.dataset.originalLabel = button.getAttribute('aria-label') || 'Play audio preview';
+        button.addEventListener('click', () => {
+          const row = button.closest('.track-row, .beat-card');
+          if (activeAudio && activeAudio.row === row) stopPreview();
+          else startPreview(row);
+        });
+      });
+
+      // Store filters and cart
+      $$('.filter-tab').forEach(tab => tab.addEventListener('click', () => {
+        $$('.filter-tab').forEach(item => item.classList.remove('active'));
+        tab.classList.add('active');
+        const filter = tab.dataset.filter;
+        $$('.beat-card').forEach(card => card.hidden = filter !== 'all' && card.dataset.genre !== filter);
+      }));
+      function updateCart() { $('#cartCount').textContent = cart.length; }
+      $$('.add-beat').forEach(button => button.addEventListener('click', () => {
+        const exists = cart.find(item => item.id === button.dataset.id);
+        if (exists) notify('That beat is already in your cart.');
+        else {
+          cart.push({ id: button.dataset.id, name: button.dataset.name, price: Number(button.dataset.price) });
+          updateCart();
+          notify(`${button.dataset.name} added to your cart.`);
+        }
+      }));
+
+      function openModal(content) {
+        modalContent.innerHTML = content;
+        modalBackdrop.classList.add('open');
+        document.body.classList.add('modal-open');
+        $('.modal-close', modalBackdrop).focus();
+      }
+      function closeModal() {
+        modalBackdrop.classList.remove('open');
+        document.body.classList.remove('modal-open');
+      }
+      $('.modal-close', modalBackdrop).addEventListener('click', closeModal);
+      modalBackdrop.addEventListener('click', event => { if (event.target === modalBackdrop) closeModal(); });
+      document.addEventListener('keydown', event => {
+        if (event.key === 'Escape') {
+          closeModal();
+          closeLightbox();
+        }
+      });
+
+      function openCheckout() {
+        if (!cart.length) {
+          openModal(`<div class="eyebrow">Beat market</div><h2 id="modalTitle">Your cart is clear.</h2><p>Browse the instrumentals and add a beat to get started.</p><button class="btn" type="button" data-go-store>Browse beats <span>↗</span></button>`);
+          $('[data-go-store]').addEventListener('click', () => { closeModal(); $('#beats').scrollIntoView({ behavior: 'smooth' }); });
+          return;
+        }
+        const total = cart.reduce((sum, item) => sum + item.price, 0);
+        openModal(`<div class="eyebrow">Secure checkout</div><h2 id="modalTitle">Your beat cart</h2><p>MP3 lease · Instant delivery after checkout</p>
+          <div style="margin:18px 0">${cart.map((item, index) => `<div class="checkout-total"><span>${item.name} <button type="button" data-remove="${index}" style="background:none;border:0;color:#888;cursor:pointer;font-size:10px;margin-left:8px">remove</button></span><strong>$${item.price}</strong></div>`).join('')}</div>
+          <div class="checkout-total"><span>Total</span><strong id="checkoutTotal">$${total}</strong></div>
+          <form class="modal-form" id="checkoutForm">
+            <label>Email for delivery<input type="email" name="email" required placeholder="you@email.com"></label>
+            <label>Name on card<input name="cardname" required placeholder="Full name"></label>
+            <label>Card number<input name="card" inputmode="numeric" maxlength="19" required placeholder="4242 4242 4242 4242" pattern="[0-9 ]{13,19}"></label>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+              <label>Expiry<input required placeholder="MM / YY" maxlength="7"></label>
+              <label>Security code<input required inputmode="numeric" maxlength="4" placeholder="CVC"></label>
+            </div>
+            <button class="btn" type="submit">Complete purchase · $${total}</button>
+            <p class="demo-disclaimer">Demo checkout: no payment is processed and no files are delivered.</p>
+          </form>`);
+        $$('[data-remove]', modalContent).forEach(btn => btn.addEventListener('click', () => {
+          cart.splice(Number(btn.dataset.remove), 1); updateCart(); openCheckout();
+        }));
+        $('#checkoutForm', modalContent).addEventListener('submit', event => {
+          event.preventDefault();
+          cart = []; updateCart(); closeModal();
+          notify('Demo order complete — thanks for supporting independent sound.');
+        });
+      }
+      $('#cartButton').addEventListener('click', openCheckout);
+
+      // Booking calendar
+      const dateKey = date => `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')}`;
+      function renderCalendar() {
+        const grid = $('#calendarGrid');
+        grid.innerHTML = '';
+        $('#calendarMonth').textContent = calendarCursor.toLocaleDateString(undefined, { month: 'long', year: 'numeric' });
+        ['Su','Mo','Tu','We','Th','Fr','Sa'].forEach(day => {
+          const cell = document.createElement('span');
+          cell.className = 'cal-label'; cell.textContent = day; grid.appendChild(cell);
+        });
+        const year = calendarCursor.getFullYear(), month = calendarCursor.getMonth();
+        const firstDay = new Date(year, month, 1).getDay();
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+        const today = new Date(); today.setHours(0,0,0,0);
+        for (let i = 0; i < firstDay; i++) {
+          const blank = document.createElement('span'); grid.appendChild(blank);
+        }
+        for (let day = 1; day <= daysInMonth; day++) {
+          const date = new Date(year, month, day);
+          const button = document.createElement('button');
+          button.type = 'button'; button.className = 'cal-day'; button.textContent = day;
+          if (date < today) button.disabled = true;
+          if (date.getTime() === today.getTime()) button.classList.add('today');
+          if (selectedDate && dateKey(date) === dateKey(selectedDate)) button.classList.add('selected');
+          button.setAttribute('aria-label', date.toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' }));
+          button.addEventListener('click', () => {
+            selectedDate = date;
+            $('#selectedDateLabel').textContent = date.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
+            renderCalendar();
+          });
+          grid.appendChild(button);
+        }
+      }
+      $('#prevMonth').addEventListener('click', () => {
+        const now = new Date();
+        if (calendarCursor.getFullYear() > now.getFullYear() || calendarCursor.getMonth() > now.getMonth()) {
+          calendarCursor.setMonth(calendarCursor.getMonth() - 1); renderCalendar();
+        }
+      });
+      $('#nextMonth').addEventListener('click', () => { calendarCursor.setMonth(calendarCursor.getMonth() + 1); renderCalendar(); });
+      renderCalendar();
+
+      const rates = { recording: 75, mixing: 90, production: 100 };
+      function updateSessionTotal() {
+        const rate = rates[$('#sessionType').value] || 75;
+        const hours = Number($('#sessionLength').value);
+        $('#sessionTotal').textContent = `$${rate * hours}`;
+      }
+      $('#sessionType').addEventListener('change', updateSessionTotal);
+      $('#sessionLength').addEventListener('change', updateSessionTotal);
+      $('#bookingForm').addEventListener('submit', event => {
+        event.preventDefault();
+        if (!selectedDate) { notify('Choose a date on the calendar first.'); return; }
+        if (!$('#sessionTime').value) { notify('Choose a session start time.'); return; }
+        const sessionType = $('#sessionType').selectedOptions[0].textContent.split(' — ')[0];
+        const dateText = selectedDate.toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+        const time = $('#sessionTime').value;
+        const total = $('#sessionTotal').textContent;
+        openModal(`<div class="eyebrow">Session request</div><h2 id="modalTitle">Lock in the room.</h2><p>Your request is almost ready. Add your contact details and we’ll get back to confirm availability.</p>
+          <div class="checkout-total"><span>${sessionType}<br>${dateText} · ${time} · ${$('#sessionLength').value} hours</span><strong>${total}</strong></div>
+          <form class="modal-form" id="sessionConfirmForm">
+            <label>Your name<input name="name" required placeholder="Full name"></label>
+            <label>Email address<input name="email" type="email" required placeholder="you@email.com"></label>
+            <label>Phone (optional)<input name="phone" type="tel" placeholder="(555) 000-0000"></label>
+            <button class="btn" type="submit">Send booking request <span>↗</span></button>
+            <p class="demo-disclaimer">No payment is taken now. Your booking is confirmed after studio follow-up.</p>
+          </form>`);
+        $('#sessionConfirmForm', modalContent).addEventListener('submit', e => {
+          e.preventDefault(); closeModal(); notify('Booking request sent. We’ll be in touch to confirm.');
+        });
+      });
+
+      // Contact form
+      $('#contactForm').addEventListener('submit', event => {
+        event.preventDefault();
+        $('#contactFeedback').classList.add('show');
+        event.target.reset();
+        setTimeout(() => $('#contactFeedback').classList.remove('show'), 6000);
+      });
+
+      // Image lightbox
+      const lightbox = $('#lightbox');
+      function closeLightbox() { lightbox.classList.remove('open'); }
+      $$('.gallery-item').forEach(item => item.addEventListener('click', () => {
+        const image = $('img', lightbox);
+        image.src = item.dataset.full;
+        image.alt = $('img', item).alt;
+        $('.lightbox-caption').textContent = $('.gallery-label strong', item).textContent;
+        lightbox.classList.add('open');
+      }));
+      $('#lightboxClose').addEventListener('click', closeLightbox);
+      lightbox.addEventListener('click', event => { if (event.target === lightbox) closeLightbox(); });
+    })();
+  </script>
+</body>
+</html>
